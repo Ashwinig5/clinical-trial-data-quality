@@ -10,4 +10,4 @@ wheels/
 .venv
 
 # Excel temporary files
-~$*.xlsxs
+~$*.xlsx

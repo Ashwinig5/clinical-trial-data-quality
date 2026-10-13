@@ -5,13 +5,10 @@ connection = pyodbc.connect(connection_string)
 cursor = connection.cursor()
 print("Database connection successful")
 
-cursor.execute("SELECT COUNT(*) FROM Queries")
-result=cursor.fetchone()
-print(result[0])
 
 cursor.execute("select status, count(*) as query_count from queries group by status")
 result = cursor.fetchall()
-status,query_count= result[0]
+
 for status,query_count in result:
     print(status,query_count)
 
@@ -44,7 +41,6 @@ query_counts =[]
 for field_name, query_count in result:
     query_counts.append(query_count)
 max_queries= max(query_counts)
-print(max_queries)
 
 
 #get the field name associalted with that maximum
@@ -101,7 +97,7 @@ for field_name, data_domain in result:
 print(domain_counts)
 
 max_counts= max(domain_counts.values())
-print(max_counts)
+
 
 for data_domain, query_count in domain_counts.items():
     if query_count == max_counts:
@@ -130,14 +126,13 @@ subject_count=[]
 for r in result:
     subject_id,query_count=r
     subject_count.append(subject_id)
-print(len(subject_count))
+
 
 
 #subject with queries
 cursor.execute("select count(*) from subjects")
 result= cursor.fetchone()
 total_subjects= result[0]
-print(total_subjects)
 
 
 percentage = (len(subject_count)/total_subjects)*100
